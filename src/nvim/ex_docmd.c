@@ -4616,8 +4616,9 @@ static int check_more(bool message, bool forceit)
 {
   int n = ARGCOUNT - curwin->w_arg_idx - 1;
 
+  // mfx: a global "set hidden" (p_hid) overrides that annoying quitmore check
   if (!forceit && only_one_window()
-      && ARGCOUNT > 1 && !arg_had_last && n > 0 && quitmore == 0) {
+      && ARGCOUNT > 1 && !arg_had_last && n > 0 && quitmore == 0 && !p_hid) {
     if (message) {
       if ((p_confirm || (cmdmod.cmod_flags & CMOD_CONFIRM)) && curbuf->b_fname != NULL) {
         char buff[DIALOG_MSG_SIZE];
